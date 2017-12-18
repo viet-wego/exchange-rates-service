@@ -18,9 +18,12 @@ import static org.apache.commons.codec.CharEncoding.UTF_8;
 public class ExchangeRatesServlet extends HttpServlet {
 
     private static final Logger LOGGER = Logger.getLogger(ExchangeRatesServlet.class);
+
     public static final String CURRENT_RATES_END_POINT = "current_rates";
     public static final String JSON_CONTENT_TYPE_HEADER = "application/json; charset=utf-8";
     public static final String CURRENCY_PARAM = "currency";
+
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {

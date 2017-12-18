@@ -2,7 +2,6 @@ package com.github.viettd.exchange_rates.common;
 
 import org.apache.commons.configuration.CompositeConfiguration;
 import org.apache.commons.configuration.HierarchicalINIConfiguration;
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import java.io.File;

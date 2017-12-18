@@ -21,6 +21,9 @@ import static org.apache.commons.codec.Charsets.UTF_8;
 public class Utils {
 
     private static final Logger LOGGER = Logger.getLogger(Utils.class);
+    public static final String HTTP_X_FORWARDED_FOR = "HTTP_X_FORWARDED_FOR";
+    public static final String X_FORWARDED_FOR = "X-Forwarded-For";
+    public static final String REMOTE_ADDR = "REMOTE_ADDR";
 
     public static String callGetApi(String url) {
         String response = "";
@@ -53,12 +56,12 @@ public class Utils {
 
     public static String getClientIp(HttpServletRequest req) {
         String clientIp = "";
-        if (req.getHeader("HTTP_X_FORWARDED_FOR") != null) {
-            clientIp = req.getHeader("HTTP_X_FORWARDED_FOR");
-        } else if (req.getHeader("X-Forwarded-For") != null) {
-            clientIp = req.getHeader("X-Forwarded-For");
-        } else if (req.getHeader("REMOTE_ADDR") != null) {
-            clientIp = req.getHeader("REMOTE_ADDR");
+        if (req.getHeader(HTTP_X_FORWARDED_FOR) != null) {
+            clientIp = req.getHeader(HTTP_X_FORWARDED_FOR);
+        } else if (req.getHeader(X_FORWARDED_FOR) != null) {
+            clientIp = req.getHeader(X_FORWARDED_FOR);
+        } else if (req.getHeader(REMOTE_ADDR) != null) {
+            clientIp = req.getHeader(REMOTE_ADDR);
         }
         if ("".equals(clientIp)) {
             clientIp = req.getRemoteAddr();
