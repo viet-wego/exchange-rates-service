@@ -23,7 +23,7 @@ public class ServiceDaemon {
 
     private static void shutdownServer() {
         try {
-            LOGGER.info("Waiting for services stopping...");
+            LOGGER.info("Waiting for service stopping...");
             if (restServer != null) {
                 restServer.stop();
             }

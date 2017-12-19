@@ -2,6 +2,7 @@ package com.github.viettd.exchange_rates.controller;
 
 import com.github.viettd.exchange_rates.bean.Response;
 import com.github.viettd.exchange_rates.common.Constant;
+import com.github.viettd.exchange_rates.service.ExchangeRatesService;
 import com.github.viettd.exchange_rates.utils.Utils;
 import com.google.gson.GsonBuilder;
 import org.apache.commons.lang3.StringUtils;
@@ -22,7 +23,6 @@ public class ExchangeRatesServlet extends HttpServlet {
     public static final String CURRENT_RATES_END_POINT = "current_rates";
     public static final String JSON_CONTENT_TYPE_HEADER = "application/json; charset=utf-8";
     public static final String CURRENCY_PARAM = "currency";
-
 
 
     @Override
@@ -58,9 +58,9 @@ public class ExchangeRatesServlet extends HttpServlet {
             if (req.getPathInfo().equalsIgnoreCase(CURRENT_RATES_END_POINT)) {
                 String currency = req.getParameter(CURRENCY_PARAM);
                 if (StringUtils.isBlank(currency)) {
-                    // TODO: get list exchange rates
+                    response = ExchangeRatesService.getExchangeRates();
                 } else {
-                    // TODO: get exchange rate for desired currency
+                    response = ExchangeRatesService.getExchangeRate(currency.toUpperCase());
                 }
             }
         } catch (Exception e) {
