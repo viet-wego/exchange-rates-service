@@ -23,20 +23,23 @@ public class ExchangeRatesService {
 
     public static Response getExchangeRate(String currency) {
         Response response = new Response();
-        BigDecimal rateValue = ExchangeRatesStorage.getExchangeRates().getRates().get(currency);
 
-        if (rateValue != null) {
-            Map<String, BigDecimal> rate = new HashMap<>();
-            rate.put(currency, rateValue);
+        try {
+            BigDecimal rateValue = ExchangeRatesStorage.getExchangeRates().getRates().get(currency);
+            if (rateValue != null) {
+                Map<String, BigDecimal> rate = new HashMap<>();
+                rate.put(currency, rateValue);
 
-            ExchangeRateResponse rateResponse = new ExchangeRateResponse();
-            rateResponse.setBase(ExchangeRatesStorage.getExchangeRates().getBase());
-            rateResponse.setTimestamp(ExchangeRatesStorage.getExchangeRates().getTimestamp());
-            rateResponse.setRate(rate);
+                ExchangeRateResponse rateResponse = new ExchangeRateResponse();
+                rateResponse.setBase(ExchangeRatesStorage.getExchangeRates().getBase());
+                rateResponse.setTimestamp(ExchangeRatesStorage.getExchangeRates().getTimestamp());
+                rateResponse.setRate(rate);
 
-            response.setCode(CODE_SUCCESS);
-            response.setMessage(MSG_SUCCESS);
-            response.setData(rateResponse);
+                response.setCode(CODE_SUCCESS);
+                response.setMessage(MSG_SUCCESS);
+                response.setData(rateResponse);
+            }
+        } catch (Exception e) {
         }
 
         return response;
