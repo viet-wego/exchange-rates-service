@@ -11,6 +11,7 @@ public class Config {
     private static final String CONFIG_FILE_PATH = "conf" + File.separator + "config.ini";
     private static CompositeConfiguration configuration = new CompositeConfiguration();
 
+    private static String servicePath;
     private static int restPort;
     private static String version;
     private static String sourceUrl;
@@ -29,9 +30,14 @@ public class Config {
         configuration.addConfiguration(new HierarchicalINIConfiguration(configFile));
 
         restPort = getIntConfig("server", "port");
+        servicePath = getConfig("server", "service_path");
         version = getConfig("server", "version");
         sourceUrl = getConfig("source", "url");
         sourceAppId = getConfig("source", "app_id");
+    }
+
+    public static String getServicePath() {
+        return servicePath;
     }
 
     public static int getRestPort() {

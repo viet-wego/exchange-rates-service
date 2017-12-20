@@ -50,7 +50,9 @@ public class RestServer implements Runnable {
             server.setHandler(gzipHandler);
 
             String versionPath = StringUtils.isBlank(Config.getVersion()) ? "" : "/" + Config.getVersion();
-
+            if (StringUtils.isNotBlank(Config.getServicePath())) {
+                versionPath = Config.getServicePath() + versionPath;
+            }
             contextHandler.addServlet(ExchangeRatesServlet.class, versionPath + "/*");
             contextHandler.addFilter(SessionFilter.class, versionPath + "/*",
                     EnumSet.of(DispatcherType.INCLUDE, DispatcherType.REQUEST));
