@@ -3,13 +3,10 @@ package com.github.viettd.exchange_rates.common;
 import org.apache.commons.configuration.CompositeConfiguration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.HierarchicalINIConfiguration;
-import org.apache.log4j.Logger;
 
 import java.io.File;
 
 public class Config {
-
-    private static final Logger LOGGER = Logger.getLogger(Config.class);
 
     private static final String CONFIG_FILE_PATH = "conf" + File.separator + "config.ini";
     private static CompositeConfiguration configuration = new CompositeConfiguration();

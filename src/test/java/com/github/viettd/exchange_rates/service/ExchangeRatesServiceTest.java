@@ -20,6 +20,7 @@ import java.util.Map;
 import static com.github.viettd.exchange_rates.common.Constant.*;
 
 @RunWith(PowerMockRunner.class)
+@PrepareForTest(ExchangeRatesStorage.class)
 public class ExchangeRatesServiceTest {
 
     private static final String BASE_CURRENCY = "USD";
@@ -81,7 +82,6 @@ public class ExchangeRatesServiceTest {
     }
 
     @Test
-    @PrepareForTest(ExchangeRatesStorage.class)
     public void test_getExchangeRates_should_return_success_response() {
         PowerMockito.mockStatic(ExchangeRatesStorage.class);
         PowerMockito.when(ExchangeRatesStorage.getExchangeRates()).thenReturn(nullRateListResp);
@@ -92,7 +92,6 @@ public class ExchangeRatesServiceTest {
     }
 
     @Test
-    @PrepareForTest(ExchangeRatesStorage.class)
     public void test_getExchangeRate_should_return_fail_response_when_cached_rate_list_response_is_null() {
         PowerMockito.mockStatic(ExchangeRatesStorage.class);
         PowerMockito.when(ExchangeRatesStorage.getExchangeRates()).thenReturn(null);
@@ -103,7 +102,6 @@ public class ExchangeRatesServiceTest {
     }
 
     @Test
-    @PrepareForTest(ExchangeRatesStorage.class)
     public void test_getExchangeRate_should_return_fail_response_when_rate_list_is_null() {
         PowerMockito.mockStatic(ExchangeRatesStorage.class);
         PowerMockito.when(ExchangeRatesStorage.getExchangeRates()).thenReturn(nullRateListResp);
@@ -114,7 +112,6 @@ public class ExchangeRatesServiceTest {
     }
 
     @Test
-    @PrepareForTest(ExchangeRatesStorage.class)
     public void test_getExchangeRate_should_return_fail_response_when_rate_list_is_empty() {
         PowerMockito.mockStatic(ExchangeRatesStorage.class);
         PowerMockito.when(ExchangeRatesStorage.getExchangeRates()).thenReturn(emptyRateListResp);
@@ -125,7 +122,6 @@ public class ExchangeRatesServiceTest {
     }
 
     @Test
-    @PrepareForTest(ExchangeRatesStorage.class)
     public void test_getExchangeRate_should_return_fail_response_when_rate_is_not_found() {
         PowerMockito.mockStatic(ExchangeRatesStorage.class);
         PowerMockito.when(ExchangeRatesStorage.getExchangeRates()).thenReturn(sgdRateListResp);
@@ -136,7 +132,6 @@ public class ExchangeRatesServiceTest {
     }
 
     @Test
-    @PrepareForTest(ExchangeRatesStorage.class)
     public void test_getExchangeRate_should_return_successful_response_when_rate_is_found() {
         PowerMockito.mockStatic(ExchangeRatesStorage.class);
         PowerMockito.when(ExchangeRatesStorage.getExchangeRates()).thenReturn(sgdRateListResp);
