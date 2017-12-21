@@ -1,19 +1,22 @@
 package com.github.viettd.exchange_rates.common;
 
+import com.github.viettd.exchange_rates.bean.ExchangeRateListResponse;
 import com.github.viettd.exchange_rates.storage.ExchangeRatesStorage;
 import org.apache.commons.configuration.CompositeConfiguration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.HierarchicalINIConfiguration;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.time.Instant;
+import java.util.*;
 
 public class Config {
 
     private static final String CONFIG_FILE_PATH = "conf" + File.separator + "config.ini";
+    private static final int RATES_LOADING_DELAY_TIME_IN_SECONDS = 1;
+    private static final int RATES_RELOADING_PERIOD_IN_SECONDS = 300;
+    private static final int RATES_CACHING_TIME_IN_SECONDS = 3600;
+
     private static CompositeConfiguration configuration = new CompositeConfiguration();
 
     private static String servicePath;
@@ -49,7 +52,17 @@ public class Config {
         sourceUrl = getConfig("source", "url");
         sourceAppId = getConfig("source", "app_id");
 
-        ExchangeRatesStorage.loadExchangeRates();
+        Timer reloadRatesTimer = new Timer();
+        reloadRatesTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                ExchangeRateListResponse rates = ExchangeRatesStorage.getExchangeRates();
+                if (rates == null || rates.getRates() == null || rates.getRates().isEmpty()
+                        || Instant.now().minusSeconds(RATES_CACHING_TIME_IN_SECONDS).getEpochSecond() >= rates.getTimestamp()) {
+                    ExchangeRatesStorage.loadExchangeRates();
+                }
+            }
+        }, RATES_LOADING_DELAY_TIME_IN_SECONDS * 100, RATES_RELOADING_PERIOD_IN_SECONDS * 1000);
     }
 
 
