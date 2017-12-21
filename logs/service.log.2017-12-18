@@ -1,0 +1,7 @@
+ERROR 2017-12-18 22:41:40,383 Config.java:43 Configuration file doesn't exist.
+DEBUG 2017-12-18 22:41:59,727 ConfigurationUtils.java:449 ConfigurationUtils.locate(): base is /Users/vincent/projects/vincent/exchange-rates-service/conf, name is config.ini
+DEBUG 2017-12-18 22:41:59,729 DefaultFileSystem.java:281 Could not locate file config.ini at /Users/vincent/projects/vincent/exchange-rates-service/conf: no protocol: /Users/vincent/projects/vincent/exchange-rates-service/conf
+DEBUG 2017-12-18 22:41:59,735 ConfigurationUtils.java:493 Loading configuration from the path /Users/vincent/projects/vincent/exchange-rates-service/conf/config.ini
+ INFO 2017-12-18 22:42:53,131 ExchangeRatesServlet.java:59 0:0:0:0:0:0:0:1 GET /v1/	36ms	
+ INFO 2017-12-18 23:14:01,262 ServiceDaemon.java:26 Waiting for services stopping...
+ INFO 2017-12-18 23:14:01,270 ServiceDaemon.java:30 Server was shut down.

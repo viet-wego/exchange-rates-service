@@ -14,14 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import static com.github.viettd.exchange_rates.common.Constant.*;
 import static org.apache.commons.codec.CharEncoding.UTF_8;
 
 public class ExchangeRatesServlet extends HttpServlet {
 
     private static final Logger LOGGER = Logger.getLogger(ExchangeRatesServlet.class);
 
-    public static final String CURRENT_RATES_END_POINT = "current_rates";
-    public static final String JSON_CONTENT_TYPE_HEADER = "application/json; charset=utf-8";
+    public static final String CURRENT_RATES_END_POINT = "/current_rates";
     public static final String CURRENCY_PARAM = "currency";
 
 
@@ -64,7 +64,7 @@ public class ExchangeRatesServlet extends HttpServlet {
                 }
             }
         } catch (Exception e) {
-            response = new Response(Constant.CODE_ERROR, e.getMessage());
+            response = new Response(CODE_ERROR, e.getMessage());
             Utils.appendExceptionLog(log, "handle", e);
         }
         PrintWriter out = resp.getWriter();
